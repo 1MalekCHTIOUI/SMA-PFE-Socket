@@ -45,8 +45,8 @@ const socketToRoom = {};
 
 io.on("connection", (socket) => {
   console.log("CONNECTED");
-  socket.on("addUser", ({ userId, fullname }) => {
-    addUser(userId, socket.id, fullname);
+  socket.on("addUser", ({ userId, user }) => {
+    addUser(userId, socket.id, user);
     io.emit("getUsers", users);
   });
 
