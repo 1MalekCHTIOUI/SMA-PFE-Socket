@@ -15,7 +15,7 @@ const io = socket(server, {
 app.use(cors());
 
 let users = [];
-const addUser = (userId, socketId, fullname) => {
+const addUser = (userId, socketId, user) => {
   let test = true;
   users.map((user) => {
     if (user === userId) {
@@ -24,7 +24,7 @@ const addUser = (userId, socketId, fullname) => {
   });
   if (test) {
     !users.some((user) => user.userId === userId) &&
-      users.push({ userId, socketId, fullname });
+      users.push({ userId, socketId, user });
   }
 };
 const removeUser = (socketId) => {
