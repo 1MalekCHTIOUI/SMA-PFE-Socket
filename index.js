@@ -50,14 +50,18 @@ io.on("connection", (socket) => {
     io.emit("getUsers", users);
   });
 
-  socket.on("sendMessage", ({ senderId, receiverId, text, currentChat }) => {
-    const user = getUser(receiverId);
-    io.to(user?.socketId).emit("getMessage", {
-      senderId,
-      text,
-      currentChat,
-    });
-  });
+  socket.on(
+    "sendMessage",
+    ({ senderId, receiverId, text, attachement, currentChat }) => {
+      const user = getUser(receiverId);
+      io.to(user?.socketId).emit("getMessage", {
+        senderId,
+        text,
+        attachement,
+        currentChat,
+      });
+    },
+  );
   socket.on("newPost", ({ senderId, content }) => {
     // const user = getUser(receiverId)
     io.emit("newPost", {
