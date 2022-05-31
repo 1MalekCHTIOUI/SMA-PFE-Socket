@@ -196,6 +196,7 @@ io.on("connection", (socket) => {
     io.to(payload.userToSignal).emit("user joined", {
       signal: payload.signal,
       callerID: payload.callerID,
+      user: payload.user,
     });
   });
 
@@ -203,6 +204,7 @@ io.on("connection", (socket) => {
     io.to(payload.callerID).emit("receiving returned signal", {
       signal: payload.signal,
       id: socket.id,
+      user: payload.user,
     });
   });
 
