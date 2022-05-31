@@ -161,7 +161,7 @@ io.on("connection", (socket) => {
     io.emit("getUsers", users);
 
     if (room) {
-      room = room.filter((id) => id !== socket.id);
+      room = room.filter((o) => o.socket !== socket.id);
       userss[roomID] = room;
     }
   });
@@ -185,7 +185,9 @@ io.on("connection", (socket) => {
       userss[roomID] = [{ socket: socket.id, user: user }];
     }
     socketToRoom[socket.id] = roomID;
-    const usersInThisRoom = userss[roomID].filter((id) => id !== socket.id);
+    const usersInThisRoom = userss[roomID].filter(
+      (o) => o.socket !== socket.id,
+    );
 
     socket.emit("all users", usersInThisRoom);
   });
