@@ -173,16 +173,16 @@ io.on("connection", (socket) => {
 
   /*******For video chat */
 
-  socket.on("join room", (roomID) => {
+  socket.on("join room", ({ roomID, user }) => {
     if (userss[roomID]) {
       const length = userss[roomID].length;
       if (length === 4) {
         socket.emit("room full");
         return;
       }
-      userss[roomID].push(socket.id);
+      userss[roomID].push({ socket: socket.id, user: user });
     } else {
-      userss[roomID] = [socket.id];
+      userss[roomID] = [{ socket: socket.id, user: user }];
     }
     socketToRoom[socket.id] = roomID;
     const usersInThisRoom = userss[roomID].filter((id) => id !== socket.id);
