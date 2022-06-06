@@ -193,7 +193,8 @@ io.on("connection", (socket) => {
   });
 
   socket.on("sending signal", (payload) => {
-    console.log("SENDING SIGNAL TO: " + payload.userToSignal);
+    console.log("SENDING SIGNAL");
+    console.log(payload.userToSignal);
     io.to(payload.userToSignal).emit("user joined", {
       signal: payload.signal,
       callerID: payload.callerID,
@@ -202,6 +203,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("returning signal", (payload) => {
+    console.log("RETURNING SIGNAL");
     io.to(payload.callerID).emit("receiving returned signal", {
       signal: payload.signal,
       id: socket.id,
