@@ -189,7 +189,7 @@ io.on("connection", (socket) => {
     const usersInThisRoom = userss[roomID].filter(
       (o) => o.socket !== socket.id,
     );
-
+    console.log(usersInThisRoom);
     socket.emit("all users", usersInThisRoom);
   });
 
