@@ -174,6 +174,7 @@ io.on("connection", (socket) => {
   /*******For video chat */
 
   socket.on("join room", ({ roomID, user }) => {
+    console.log("join room");
     if (userss[roomID]) {
       const length = userss[roomID].length;
       if (length === 4) {
