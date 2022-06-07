@@ -82,6 +82,13 @@ io.on("connection", (socket) => {
       postId,
     });
   });
+  socket.on("newComment", ({ receiverId, comment, postId }) => {
+    const user = getUser(receiverId);
+    io.to(user?.socketId).emit("newComment", {
+      comment,
+      postId,
+    });
+  });
 
   socket.on("sendNotification", ({ senderId, receiverId, content }) => {
     const user = getUser(receiverId);
