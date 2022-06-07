@@ -76,6 +76,12 @@ io.on("connection", (socket) => {
       postId,
     });
   });
+  socket.on("newUnlike", ({ receiverId, postId }) => {
+    const user = getUser(receiverId);
+    io.to(user?.socketId).emit("newUnlike", {
+      postId,
+    });
+  });
 
   socket.on("sendNotification", ({ senderId, receiverId, content }) => {
     const user = getUser(receiverId);
