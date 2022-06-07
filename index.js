@@ -69,10 +69,11 @@ io.on("connection", (socket) => {
       content,
     });
   });
-  socket.on("newLike", ({ receiverId, content }) => {
+  socket.on("newLike", ({ receiverId, content, postId }) => {
     const user = getUser(receiverId);
     io.to(user?.socketId).emit("newLike", {
       content,
+      postId,
     });
   });
 
