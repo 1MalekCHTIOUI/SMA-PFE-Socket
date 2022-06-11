@@ -117,7 +117,7 @@ io.on("connection", (socket) => {
   socket.on("createGroup", (data) => {
     if (data.members.length > 0) {
       data.members.map((m) => {
-        const user = getUser(m);
+        const user = getUser(m.userId);
         io.to(user?.socketId).emit("groupCreated", data);
       });
     }
@@ -125,7 +125,7 @@ io.on("connection", (socket) => {
   socket.on("removeGroup", (data) => {
     if (data.members.length > 0) {
       data.members.map((m) => {
-        const user = getUser(m);
+        const user = getUser(m.userId);
         io.to(user?.socketId).emit("groupRemoved", data);
       });
     }
